@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع التحفيز للدراسة | Motivation Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* إعادة تعيين أساسي */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* تنسيق الخطوط للعربية */
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            text-align: right;
+            direction: rtl;
+            min-height: 100vh;
+        }
+        
+        /* المتغيرات اللونية */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        /* التمرير السلس */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* تأثيرات الحركة (Animations) */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+
+        @keyframes bounceIn {
+            0%, 20%, 53%, 80%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+                transform: translate3d(0,0,0);
+            }
+            40%, 43% {
+                transition-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+                transform: translate3d(0, -30px, 0);
+            }
+            70% {
+                transition-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+                transform: translate3d(0, -15px, 0);
+            }
+            90% {
+                transform: translate3d(0,-4px,0);
+            }
+        }
+        
+        /* الشريط العلوي */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.2rem 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo i {
+            font-size: 2.2rem;
+            color: #f1c40f;
+        }
+        
+        /* تنسيق الأقسام الرئيسية */
+        .section-container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 3rem 1.5rem;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 1s ease-out; 
+        }
+
+        .section-container h2 {
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+            font-weight: 900;
+            position: relative;
+        }
+
+        .section-container h2:after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            height: 5px;
+            width: 150px;
+            bottom: -10px;
+            right: 0;
+            border-radius: 2px;
+        }
+
+        /* ---------------------------------- */
+        /* تنسيق قسم كيف تشعر اليوم (Mood Section) */
+        /* ---------------------------------- */
+        .mood-section {
+            padding: 3.5rem 1.5rem;
+            background-color: #f7f7f7;
+            border-radius: 20px;
+            margin: 3rem auto;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-top: 8px solid var(--secondary);
+            text-align: center;
+        }
+        
+        .mood-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .mood-btn {
+            padding: 18px 40px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        .mood-btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        .mood-btn.sad { background-color: #e74c3c; }
+        .mood-btn.happy { background-color: #2ecc71; }
+        .mood-btn.neutral { background-color: #f39c12; }
+
+        /* ---------------------------------- */
+        /* تنسيق معرض الصور الجديد (11 صورة) */
+        /* ---------------------------------- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* تم تعديل العرض الأدنى ليستوعب 11 عنصرًا بشكل أفضل */
+            gap: 20px;
+            text-align: center;
+        }
+
+        .gallery-item {
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px; 
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            background-color: #f0f4f7;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* ---------------------------------- */
+        /* تنسيق الصفحات المنبثقة (الجرافيك المستعاد) */
+        /* ---------------------------------- */
+        .mood-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 5000;
+            padding: 1rem;
+            overflow-y: auto;
+            align-items: center; 
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .mood-page.active {
+            display: flex;
+        }
+        
+        .page-content {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            max-width: 950px;
+            width: 95%;
+            margin: 0 auto;
+            border-radius: 25px;
+            padding: 3rem;
+            position: relative;
+            animation: bounceIn 0.8s ease-out; 
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid var(--secondary);
+        }
+        
+        .page-title {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+            font-size: 2.5rem;
+            font-weight: 900;
+            padding-bottom: 10px;
+            border-bottom: 3px dashed var(--accent);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--accent);
+            width: 45px;
+            height: 45px;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+        
+        .quote-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 3rem;
+        }
+
+        .quote-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .page-quote {
+            font-size: 2rem; 
+            line-height: 1.7;
+            text-align: center;
+            padding: 3rem;
+            background-color: #fefefe;
+            border-radius: 15px;
+            border-right: 10px solid var(--secondary);
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            color: #1a1a1a;
+            position: relative;
+        }
+
+        .page-quote:before {
+            content: "\f10d"; 
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 3rem;
+            color: rgba(52, 152, 219, 0.2);
+        }
+        
+        .page-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 3rem;
+        }
+        
+        .action-btn {
+            padding: 15px 30px;
+            background-color: var(--success);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.4);
+        }
+
+        .action-btn:hover {
+            background-color: #219d55;
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.6);
+        }
+        
+        /* ---------------------------------- */
+        /* تنسيق بطاقات القصص */
+        /* ---------------------------------- */
+        .story-card {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            border-right: 8px solid var(--secondary);
+            transition: var(--transition);
+        }
+
+        .story-card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-right: 15px;
+            border-right: 4px solid var(--primary);
+        }
+        
+        /* ---------------------------------- */
+        /* تنسيق بطاقات المشاكل (مع Animation) */
+        /* ---------------------------------- */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 25px;
+            margin-top: 1.5rem;
+        }
+
+        .problem-card {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 8px solid var(--accent);
+            transition: var(--transition);
+            animation: fadeInUp 1s ease-out; 
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            border-left: 8px solid var(--secondary);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .problem-card h3 {
+            color: var(--accent);
+        }
+        
+        /* ---------------------------------- */
+        /* الفوتر (الجرافيك المحسن) */
+        /* ---------------------------------- */
+        footer {
+            background: linear-gradient(to right, #2c3e50, #1d2a35);
+            color: white;
+            padding: 3rem 1.5rem 2rem;
+            margin-top: 4rem;
+            border-top: 5px solid #f1c40f;
+        }
+        
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #f1c40f;
+            position: relative;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-section p {
+            margin-bottom: 1rem;
+            color: #ecf0f1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .whatsapp-link {
+            color: #25d366;
+            font-weight: 700;
+        }
+
+        /* التجاوب مع الشاشات */
+        @media (max-width: 768px) {
+            .problems-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-quote {
+                font-size: 1.4rem;
+                padding: 2rem;
+            }
+            .page-title {
+                font-size: 1.8rem;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>موقع <span>التحفيز</span> للدراسة</h1>
+            </div>
+        </div>
+    </header>
+    
+    <section class="mood-section">
+        <h2><i class="fas fa-magic"></i> اختر حالتك المزاجية وابدأ التحفيز</h2>
+        <p style="margin-bottom: 1.5rem; font-size: 1.1rem; color: #555;">
+            سنقدم لك اقتباسات وأفكاراً تناسب وضعك الحالي لتعزيز تركيزك ودافعك.
+        </p>
+        
+        <div class="mood-buttons">
+            <button class="mood-btn sad" id="sadBtn">
+                <i class="fas fa-frown"></i> أنا محبط/زعلان
+            </button>
+            <button class="mood-btn happy" id="happyBtn">
+                <i class="fas fa-laugh-beam"></i> أنا سعيد/متحمس
+            </button>
+            <button class="mood-btn neutral" id="neutralBtn">
+                <i class="fas fa-meh"></i> أنا عادي/محتاج أركز
+            </button>
+        </div>
+    </section>
+
+    <section class="section-container" style="background-color: #eaf2f8;">
+        <h2><i class="fas fa-images"></i> 11 محفز بصري (صور جاهزة)</h2>
+        <p style="text-align: center; margin-bottom: 20px; color: #555;">(تم استبدال جميع الأيقونات بـ 11 صورة، تحتاج إلى `img1.jpg` حتى `img11.jpg` في مجلد `images/`)</p>
+        
+        <div class="gallery-grid">
+            
+            <div class="gallery-item" data-topic="صورة نجاح 1" style="border-bottom: 3px solid #3498db; padding: 10px;">
+                <img src="images/img1.jpg" alt="صورة تحفيزية للنجاح">
+                <p>لحظة إنجاز</p>
+            </div>
+            <div class="gallery-item" data-topic="صورة تركيز 2" style="border-bottom: 3px solid #9b59b6; padding: 10px;">
+                <img src="images/img2.jpg" alt="صورة تحفيزية للتركيز">
+                <p>العقل المفكر</p>
+            </div>
+            <div class="gallery-item" data-topic="صورة تنظيم 3" style="border-bottom: 3px solid #1abc9c; padding: 10px;">
+                <img src="images/img3.jpg" alt="صورة تحفيزية للتنظيم">
+                <p>تنظيم الوقت</p>
+            </div>
+            <div class="gallery-item" data-topic="صورة مستقبل 4" style="border-bottom: 3px solid #f39c12; padding: 10px;">
+                <img src="images/img4.jpg" alt="صورة تحفيزية للمستقبل">
+                <p>أهداف المستقبل</p>
+            </div>
+            <div class="gallery-item" data-topic="صورة مثابرة 5" style="border-bottom: 3px solid #e84393; padding: 10px;">
+                <img src="images/img5.jpg" alt="صورة تحفيزية للمثابرة">
+                <p>المثابرة</p>
+            </div>
+            <div class="gallery-item" data-topic="صورة قراءة 6" style="border-bottom: 3px solid #0984e3; padding: 10px;">
+                <img src="images/img6.jpg" alt="صورة تحفيزية للقراءة">
+                <p>متعة القراءة</p>
+            </div>
+            <div class="gallery-item" data-topic="صورة تفوق 7" style="border-bottom: 3px solid #6c5ce7; padding: 10px;">
+                <img src="images/img7.jpg" alt="صورة تحفيزية للتفوق">
+                <p>رمز النجاح</p>
+            </div>
+            <div class="gallery-item" data-topic="صورة إرادة 8" style="border-bottom: 3px solid #f1c40f; padding: 10px;">
+                <img src="images/img8.jpg" alt="صورة قوة الإرادة">
+                <p>قوة الإرادة</p>
+            </div>
+            <div class="gallery-item" data-topic="صورة تحدي 9" style="border-bottom: 3px solid #2ecc71; padding: 10px;">
+                <img src="images/img9.jpg" alt="صورة تحدي القمم">
+                <p>تحدي القمم</p>
+            </div>
+            <div class="gallery-item" data-topic="صورة شغف 10" style="border-bottom: 3px solid #e74c3c; padding: 10px;">
+                <img src="images/img10.jpg" alt="صورة شغف التعلم">
+                <p>شغف التعلم</p>
+            </div>
+            <div class="gallery-item" data-topic="صورة هدف 11" style="border-bottom: 3px solid #8e44ad; padding: 10px;">
+                <img src="images/img11.jpg" alt="صورة تحقيق الأهداف">
+                <p>تحقيق الهدف</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section-container">
+        <h2><i class="fas fa-book-open"></i> قصص ملهمة للطلاب والناجحين</h2>
+        
+        <div class="story-card">
+            <h3 style="border-right-color: #000;"><i class="fab fa-apple"></i> ستيف جوبز: الربط بين النقاط</h3>
+            <p>
+                فكرة جوبز لم تكن اختراع جهاز لوحي أو هاتف ذكي، بل كانت الإيمان بالقدرة على ربط النقاط (Connecting the Dots). بعد أن تم فصله من شركة آبل التي شارك في تأسيسها، عاد إليها ليجعلها أعظم شركة في العالم. لم يستسلم جوبز للفشل، بل استخدم كل تجربة سابقة، بما في ذلك دراسته لخطوط الكتابة (Calligraphy)، ليصنع منتجات ذات تصميم استثنائي. هذا يُعلمنا أن كل معلومة نتعلمها اليوم، وكل تجربة نمر بها، حتى لو بدت بلا فائدة الآن، ستصبح نقطة مهمة في خط نجاحنا المستقبلي.
+            </p>
+        </div>
+
+        <div class="story-card">
+            <h3 style="border-right-color: #e74c3c;"><i class="fas fa-rocket"></i> إيلون ماسك: تحدي المستحيل في الفضاء</h3>
+            <p>
+                إيلون ماسك واجه فشلاً ماليًا وتقنيًا متكررًا في بدايات شركتي SpaceX و Tesla. في عام 2008، كانت SpaceX على وشك الإفلاس بعد فشل 3 إطلاقات متتالية للصواريخ، لكن ماسك ضخ كل أمواله المتبقية ونجح في الإطلاق الرابع. قصته مثال حي على أن الإيمان القوي بالهدف يتجاوز الخسائر المؤقتة. رسالته للطلاب: عندما يكون هدفك نبيلاً وذا تأثير عالمي، استمر في المحاولة حتى لو بدت الاحتمالات ضدك.
+            </p>
+        </div>
+        
+        <div class="story-card">
+            <h3 style="border-right-color: #27ae60;"><i class="fas fa-dollar-sign"></i> وارن بافيت: قوة التعلم المركب</h3>
+            <p>
+                أحد أغنى أغنياء العالم، لا يزال وارن بافيت يقضي معظم وقته في القراءة والتعلم. يرى بافيت أن المعرفة هي استثمار يتضاعف بمرور الوقت (Compound Knowledge). بدأ بافيت استثماراته في سن مبكرة جداً وطور قدرته على اتخاذ القرارات من خلال قراءة مئات التقارير والكتب. قصته تشجع على أن الاستثمار في التعلم والمعرفة اليومي هو أهم استثمار يمكن أن يقوم به الطالب.
+            </p>
+        </div>
+
+        <div class="story-card">
+            <h3 style="border-right-color: #9b59b6;"><i class="fas fa-atom"></i> ماري كوري: الإصرار في البحث العلمي</h3>
+            <p>
+                ماري كوري، العالمة الوحيدة التي فازت بجائزتي نوبل في مجالين علميين مختلفين (الفيزياء والكيمياء)، عاشت ظروفاً معيشية صعبة في بداياتها. كانت تعمل في مختبر بدائي وتواجه صعوبات مالية كبيرة أثناء اكتشافها لعنصري البولونيوم والراديوم. إصرارها على البحث العلمي رغم العقبات يذكرنا بأن الإنجازات العظيمة تتطلب التضحية والالتزام الثابت بالهدف.
+            </p>
+        </div>
+
+        <div class="story-card">
+            <h3 style="border-right-color: #f39c12;"><i class="fas fa-lightbulb"></i> توماس إديسون: 10000 محاولة</h3>
+            <p>
+                توماس إديسون، مخترع المصباح الكهربائي، فشل آلاف المرات قبل أن ينجح في اختراعه العظيم. عندما سئل عن إحباطه من الفشل، قال: "لم أفشل، لقد وجدت للتو 10,000 طريقة لا يعمل بها المصباح". هذه العقلية هي أساس النجاح؛ اعتبار كل فشل خطوة نحو النجاح النهائي.
+            </p>
+        </div>
+
+    </section>
+
+    <section class="section-container" style="background-color: #fcfcfc;">
+        <h2><i class="fas fa-head-side-virus"></i> 20 مشكلة وحل في الدراسة</h2>
+        
+        <div class="problems-grid">
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-exclamation-triangle"></i> 1. الفاينل غداً ولم أذاكر شيئاً!</h3>
+                <h4>الحل المدروس: التخطيط الفوري والأولوية القصوى</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **التنفس العميق والهدوء:** تجنب الهلع فهو يستهلك طاقتك دون فائدة.</li>
+                    <li><i class="fas fa-circle"></i> **تحديد 20% الأكثر أهمية:** ركز على الملخصات، النقاط الرئيسية، والأسئلة المتوقعة (قاعدة 80/20).</li>
+                    <li><i class="fas fa-circle"></i> **تقنية 30/5:** ذاكر 30 دقيقة بتركيز عالٍ ثم استرح 5 دقائق.</li>
+                </ul>
+            </div>
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-bed"></i> 2. الشعور بالإرهاق وعدم القدرة على مواصلة المذاكرة</h3>
+                <h4>الحل المدروس: إعادة شحن الطاقة بذكاء</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **النوم أولاً:** لا تضحي بالنوم، النوم الجيد يعزز الذاكرة أكثر من المذاكرة تحت التعب.</li>
+                    <li><i class="fas fa-circle"></i> **الحركة الخفيفة:** مارس تمارين تمدد أو مشي لمدة 10 دقائق لتنشيط الدورة الدموية.</li>
+                    <li><i class="fas fa-circle"></i> **تغيير البيئة:** انتقل من المكتب إلى مقهى هادئ أو مكتبة لتجديد نشاط عقلك.</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <h3><i class="fas fa-clock"></i> 3. المماطلة وتأجيل البدء بالدراسة</h3>
+                <h4>الحل المدروس: كسر الحاجز النفسي</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **قاعدة الدقيقتين:** ابدأ بأي مهمة تستغرق أقل من دقيقتين (مثل تجهيز الكتب أو فتح الملف).</li>
+                    <li><i class="fas fa-circle"></i> **تقسيم المهام:** قسم المهمة الكبيرة إلى "جرعات" صغيرة جداً لا تشعر معها بالتهديد (مثال: قراءة صفحة واحدة).</li>
+                    <li><i class="fas fa-circle"></i> **تجنب المشتتات:** أبعد الهاتف وجميع التنبيهات قبل البدء.</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <h3><i class="fas fa-satellite-dish"></i> 4. عدم القدرة على التركيز أثناء المذاكرة</h3>
+                <h4>الحل المدروس: تدريب العقل على الانتباه</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **تحديد وقت محدد للمشتتات:** خصص 5 دقائق كل ساعة لتفقد الهاتف، والتزم بعدم لمسه خارج هذا الوقت.</li>
+                    <li><i class="fas fa-circle"></i> **بيئة هادئة:** استخدم سماعات إلغاء الضوضاء أو موسيقى بيضاء (White Noise).</li>
+                    <li><i class="fas fa-circle"></i> **استخدام Pomodoro:** ذاكر 25 دقيقة بتركيز تام ثم استرح 5 دقائق، وهذا يدرب العقل على التركيز في فترات قصيرة.</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <h3><i class="fas fa-eraser"></i> 5. نسيان المعلومات بعد مذاكرتها مباشرة</h3>
+                <h4>الحل المدروس: تقنية التكرار المتباعد</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **التكرار المتباعد (Spaced Repetition):** راجع المادة بعد يوم، ثم بعد 3 أيام، ثم أسبوع.</li>
+                    <li><i class="fas fa-circle"></i> **الشرح بصوت عالٍ:** اشرح المفهوم لشخص آخر (أو لنفسك في المرآة).</li>
+                    <li><i class="fas fa-circle"></i> **الخرائط الذهنية:** حول المعلومات النصية إلى مخططات ورسوم بيانية لربط المفاهيم.</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <h3><i class="fas fa-layer-group"></i> 6. تراكم المواد والشعور بالضياع</h3>
+                <h4>الحل المدروس: خطة "الانتهاء أولاً"</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **جرد الواقع:** اكتب قائمة بكل ما يجب مذاكرته والوقت المتبقي.</li>
+                    <li><i class="fas fa-circle"></i> **أولوية الصعب والأهم:** ابدأ بالمادة الأصعب والأكثر وزناً في الدرجات.</li>
+                    <li><i class="fas fa-circle"></i> **تخصيص كتل زمنية:** لا تدرس مادة واحدة طول اليوم. خصص 3 كتل زمنية لمواد مختلفة يوميًا.</li>
+                </ul>
+            </div>
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-fear-mongering"></i> 7. الخوف والقلق المفرط قبل الامتحان</h3>
+                <h4>الحل المدروس: التحويل من الهلع إلى الفعل</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **التخيل الإيجابي:** تخيل نفسك تجيب على الأسئلة بنجاح.</li>
+                    <li><i class="fas fa-circle"></i> **الإعداد للمجهول:** ذاكر كل ما تستطيعه لتفادي الشعور بالتقصير الذي يغذي القلق.</li>
+                    <li><i class="fas fa-circle"></i> **تجنب المراجعة اللحظية:** قبل الامتحان بساعة، توقف عن المذاكرة وقم بنشاط مريح.</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <h3><i class="fas fa-tools"></i> 8. مكان الدراسة فوضوي أو صاخب</h3>
+                <h4>الحل المدروس: قاعدة "البيئة أولاً"</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **التنظيف قبل البدء:** قم بترتيب المكتب لمدة 5 دقائق قبل المذاكرة.</li>
+                    <li><i class="fas fa-circle"></i> **الإضاءة الجيدة:** تأكد من أن الإضاءة مناسبة وليست خافتة لتجنب إجهاد العين.</li>
+                    <li><i class="fas fa-circle"></i> **تغيير الجلوس:** لا تدرس على السرير أبداً. الجلوس على كرسي ومكتب يرسل إشارة للتركيز.</li>
+                </ul>
+            </div>
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-puzzle-piece"></i> 9. صعوبة فهم المفاهيم المعقدة</h3>
+                <h4>الحل المدروس: التبسيط وربط المفاهيم</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **طريقة فاينمان:** حاول شرح المفهوم لشخص عمره 5 سنوات. إذا لم تستطع، فأنت لم تفهمه بعد.</li>
+                    <li><i class="fas fa-circle"></i> **استخدام الأمثلة الواقعية:** اربط المفهوم المعقد بأمثلة من الحياة اليومية.</li>
+                    <li><i class="fas fa-circle"></i> **مشاهدة الفيديوهات:** ابحث عن شرح مرئي على يوتيوب للموضوع المعقد.</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <h3><i class="fas fa-box-open"></i> 10. الشعور بالملل من الروتين الدراسي</h3>
+                <h4>الحل المدروس: التنويع والتحفيز</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **تغيير أسلوب المذاكرة:** انتقل من القراءة إلى كتابة الملاحظات، ثم إلى حل الأسئلة.</li>
+                    <li><i class="fas fa-circle"></i> **المكافآت الصغيرة:** كافئ نفسك بشيء تحبه (شوكولاتة، 15 دقيقة تصفح) بعد إنهاء جزء مهم.</li>
+                    <li><i class="fas fa-circle"></i> **الدراسة الجماعية (أحياناً):** الدراسة مع الأصدقاء يمكن أن يكسر الملل ويزيد الحماس.</li>
+                </ul>
+            </div>
+            
+             <div class="problem-card">
+                <h3><i class="fas fa-user-friends"></i> 11. تأثير الأصدقاء المشتتين</h3>
+                <h4>الحل المدروس: وضع الحدود الواضحة</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **الاعتذار اللطيف:** استخدم عبارات مثل "لدي أولويات الآن، سنتقابل بعد الاختبار".</li>
+                    <li><i class="fas fa-circle"></i> **تخصيص وقت اجتماعي:** خصص وقتاً ثابتاً للقاء الأصدقاء بعيداً عن أوقات المذاكرة.</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <h3><i class="fas fa-pen-nib"></i> 12. كيفية تدوين الملاحظات الفعالة</h3>
+                <h4>الحل المدروس: نظام كورنيل أو الخرائط</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **نظام كورنيل:** قسم الصفحة إلى 3 أقسام (ملاحظات، أسئلة، ملخص).</li>
+                    <li><i class="fas fa-circle"></i> **الكلمات المفتاحية:** اكتب النقاط الأساسية بدلاً من نسخ الجمل الطويلة.</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <h3><i class="fas fa-volume-up"></i> 13. عدم الاستفادة من المحاضرات</h3>
+                <h4>الحل المدروس: التحضير المسبق النشط</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **المراجعة المسبقة:** اقرأ العناوين الرئيسية للمحاضرة قبل حضورها لتكوين خلفية.</li>
+                    <li><i class="fas fa-circle"></i> **الاستماع النشط:** اكتب الأسئلة التي تتبادر لذهنك بدلاً من نسخ كل ما يقال.</li>
+                </ul>
+            </div>
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-dumbbell"></i> 14. ضعف الذاكرة الطويلة الأمد</h3>
+                <h4>الحل المدروس: ربط المعلومات الجديدة بالقديمة</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **الربط القصصي:** أنشئ قصة مضحكة أو غريبة لربط عدة نقاط معاً.</li>
+                    <li><i class="fas fa-circle"></i> **تقنية القصر العقلي:** تخيل المعلومات في أماكن محددة داخل غرفة أو قصر.</li>
+                </ul>
+            </div>
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-tired"></i> 15. السهر الطويل مقابل الإنتاجية</h3>
+                <h4>الحل المدروس: احترام الساعة البيولوجية</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **المذاكرة في فترة الذروة:** اكتشف الأوقات التي يكون فيها تركيزك في أعلى مستوياته (صباحاً أو ليلاً) وركز المواد الصعبة فيها.</li>
+                    <li><i class="fas fa-circle"></i> **تثبيت مواعيد النوم:** حاول النوم والاستيقاظ في نفس الأوقات حتى في الإجازات.</li>
+                </ul>
+            </div>
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-frown-open"></i> 16. الافتقار إلى الدافع الداخلي</h3>
+                <h4>الحل المدروس: ربط الدراسة بالهدف الأكبر</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **لوحة الأحلام:** ضع صوراً أو عبارات لما تريد تحقيقه مستقبلاً بالقرب من مكتبك.</li>
+                    <li><i class="fas fa-circle"></i> **تذكير بالرسالة:** اذكر نفسك لماذا بدأت أصلاً (المهنة، الأهل، التطور).</li>
+                </ul>
+            </div>
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-desktop"></i> 17. الإدمان على الهاتف ووسائل التواصل</h3>
+                <h4>الحل المدروس: التحكم بدلاً من المنع</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **تطبيقات حظر مؤقت:** استخدم تطبيقات تحظر بعض المواقع/التطبيقات في أوقات الدراسة.</li>
+                    <li><i class="fas fa-circle"></i> **وضع الطيران:** في أوقات التركيز، ضع الهاتف على وضع الطيران وأبعده عن متناول يدك.</li>
+                </ul>
+            </div>
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-meh-blank"></i> 18. الشعور بالوحدة والعزلة الدراسية</h3>
+                <h4>الحل المدروس: التوازن الاجتماعي</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **تخصيص وقت للاستراحة الاجتماعية:** أخرج لمدة ساعة يومياً أو تحدث مع العائلة.</li>
+                    <li><i class="fas fa-circle"></i> **التعاون في المهام:** اعمل على مشروع جماعي ولو لمرة واحدة في الأسبوع لتفادي العزلة.</li>
+                </ul>
+            </div>
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-heartbeat"></i> 19. الإجهاد العقلي وعدم أخذ راحة</h3>
+                <h4>الحل المدروس: استراحة العقل الإجبارية</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **قانون 90 دقيقة:** بعد 90 دقيقة من التركيز العميق، خذ استراحة لا تقل عن 15 دقيقة (يجب أن تكون بعيدة عن الشاشات).</li>
+                    <li><i class="fas fa-circle"></i> **ممارسة اليقظة الذهنية (Mindfulness):** اجلس صامتاً 5 دقائق وركز على تنفسك لتصفية الذهن.</li>
+                </ul>
+            </div>
+            
+            <div class="problem-card">
+                <h3><i class="fas fa-book-reader"></i> 20. القراءة السلبية بلا استيعاب</h3>
+                <h4>الحل المدروس: التحول إلى القراءة النشطة</h4>
+                <ul>
+                    <li><i class="fas fa-circle"></i> **طريقة SQ3R:** استطلع (Survey)، أسأل (Question)، أقرأ (Read)، أسمع (Recite)، أراجع (Review).</li>
+                    <li><i class="fas fa-circle"></i> **القلم والورقة:** لا تقرأ دون أن يكون قلم تحديد أو ورقة ملاحظات بجوارك لتفاعل عقلك مع النص.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+    
+    <div class="mood-page" id="sadPage">
+        <div class="page-content">
+            <button class="close-btn" id="closeSadPage">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="page-title"><i class="fas fa-hand-holding-heart"></i> اقتباسات لدعمك وأنت محبط</h2>
+            <div class="quote-wrapper">
+                <i class="fas fa-hand-holding-heart quote-icon" id="sadIcon" style="color: #e74c3c;"></i>
+                <div class="page-quote" id="sadQuote" style="border-right-color: #e74c3c;">
+                    "لا تدع اليأس يستولي عليك، فبعد العسر يأتي اليسر."
+                </div>
+            </div>
+            <div class="page-actions">
+                <button class="action-btn" id="nextSadQuote">اقتباس آخر</button>
+                <button class="action-btn" id="backFromSad" style="background-color: var(--primary);">العودة للصفحة الرئيسية</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mood-page" id="happyPage">
+        <div class="page-content">
+            <button class="close-btn" id="closeHappyPage">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="page-title"><i class="fas fa-trophy"></i> اقتباسات تحفيزية لزيادة الحماس</h2>
+            <div class="quote-wrapper">
+                <i class="fas fa-trophy quote-icon" id="happyIcon" style="color: #2ecc71;"></i>
+                <div class="page-quote" id="happyQuote" style="border-right-color: #2ecc71;">
+                    "طاقتك الإيجابية هي سر تقدمك، استمر فيها."
+                </div>
+            </div>
+            <div class="page-actions">
+                <button class="action-btn" id="nextHappyQuote">اقتباس آخر</button>
+                <button class="action-btn" id="backFromHappy" style="background-color: var(--primary);">العودة للصفحة الرئيسية</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mood-page" id="neutralPage">
+        <div class="page-content">
+            <button class="close-btn" id="closeNeutralPage">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="page-title"><i class="fas fa-lightbulb"></i> اقتباسات للتركيز والانضباط</h2>
+            <div class="quote-wrapper">
+                <i class="fas fa-lightbulb quote-icon" id="neutralIcon" style="color: #f39c12;"></i>
+                <div class="page-quote" id="neutralQuote" style="border-right-color: #f39c12;">
+                    "التركيز هو سر التحصيل العلمي الجيد."
+                </div>
+            </div>
+            <div class="page-actions">
+                <button class="action-btn" id="nextNeutralQuote">اقتباس آخر</button>
+                <button class="action-btn" id="backFromNeutral" style="background-color: var(--primary);">العودة للصفحة الرئيسية</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> عن الموقع</h3>
+                <p>هذا الموقع مخصص لتحفيز الطلاب على الدراسة والمثابرة. يحتوي على مئات الاقتباسات التحفيزية.</p>
+                <div style="margin-top: 1.5rem; padding: 1rem; background-color: rgba(241, 196, 15, 0.1); border-radius: 8px; border-right: 3px solid #f1c40f;">
+                    <p style="font-style: italic; font-weight: 500; color: #f1c40f;">"النجاح هو مجموع الجهود الصغيرة التي تتكرر يوماً بعد يوم"</p>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-check-double"></i> نصائح للدراسة الفعالة</h3>
+                <p><i class="fas fa-arrow-circle-left" style="color: #2ecc71;"></i> حدد أهدافًا واضحة للدراسة</p>
+                <p><i class="fas fa-arrow-circle-left" style="color: #2ecc71;"></i> خذ فترات راحة بذكاء</p>
+                <p><i class="fas fa-arrow-circle-left" style="color: #2ecc71;"></i> نظم مكان دراستك (النظافة = التركيز)</p>
+                <p><i class="fas fa-arrow-circle-left" style="color: #2ecc71;"></i> كافئ نفسك بعد إنجاز كل مهمة صعبة</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-address-book"></i> تواصل معنا - م. محمد عمر</h3>
+                <p><i class="fas fa-phone"></i> 01027650246</p>
+                <p>
+                    <i class="fab fa-whatsapp" style="color: #25d366;"></i>
+                    <a href="https://wa.me/201027650246" class="whatsapp-link" target="_blank">
+                        واتساب مباشر (م. محمد عمر)
+                    </a>
+                </p>
+                <p><i class="fas fa-envelope"></i> support@motivationhub.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // مصفوفة أيقونات الحزن
+        const sadIcons = ["fas fa-heart-broken", "fas fa-cloud-sun-rain", "fas fa-shield-alt", "fas fa-hand-holding-heart", "fas fa-umbrella"];
+        // مصفوفة أيقونات السعادة
+        const happyIcons = ["fas fa-trophy", "fas fa-bolt", "fas fa-rocket", "fas fa-star", "fas fa-sun"];
+        // مصفوفة أيقونات الحيادية
+        const neutralIcons = ["fas fa-lightbulb", "fas fa-brain", "fas fa-cogs", "fas fa-clock", "fas fa-pencil-alt"];
+
+        // اقتباسات الحزن (تم تعديل الهيكل لإضافة الأيقونة)
+        const sadQuotes = [
+            { quote: "لا تدع اليأس يستولي عليك، فبعد العسر يأتي اليسر.", icon: sadIcons[3] },
+            { quote: "التحديات تصنع منك شخصاً أقوى، فلا تستسلم.", icon: sadIcons[2] },
+            { quote: "كل مشكلة تحمل في طياتها حلاً وعبرة.", icon: sadIcons[4] },
+            { quote: "الأيام الصعبة تخلق شخصيات عظيمة.", icon: sadIcons[0] },
+            { quote: "لا تيأس، فالفجر يأتي بعد أحلك الليالي.", icon: sadIcons[1] },
+            { quote: "الصبر مفتاح الفرج، والنجاح يحتاج إلى صبر.", icon: sadIcons[2] },
+            { quote: "الضغوط تصقل الشخصية وتظهر أفضل ما فيك.", icon: sadIcons[4] },
+            { quote: "لا تقارن رحلتك برحلة الآخرين، لكلٍ مساره.", icon: sadIcons[3] },
+            { quote: "الفشل ليس نهاية، بل بداية جديدة بمعرفة أكثر.", icon: sadIcons[0] },
+            { quote: "الثقة بالنفس أول خطوات النجاح.", icon: sadIcons[2] }
+        ];
+        
+        // اقتباسات السعادة
+        const happyQuotes = [
+            { quote: "طاقتك الإيجابية هي سر تقدمك، استمر فيها.", icon: happyIcons[1], color: '#2ecc71' },
+            { quote: "الفرح بالتعلم يجعل الدراسة متعة لا عبئاً.", icon: happyIcons[3], color: '#f39c12' },
+            { quote: "السعادة والنجاح توأمان، حافظ على سعادتك.", icon: happyIcons[0], color: '#2ecc71' },
+            { quote: "الابتسامة تزيد من قدرتك على الاستيعاب.", icon: happyIcons[4], color: '#f39c12' },
+            { quote: "تفاؤلك بالغد يجعلك تجتهد اليوم.", icon: happyIcons[2], color: '#3498db' },
+            { quote: "الروح الإيجابية تجعل المستحيل ممكناً.", icon: happyIcons[1], color: '#2ecc71' },
+            { quote: "استمتع بالدراسة تستمتع بالنجاح.", icon: happyIcons[3], color: '#3498db' },
+            { quote: "الطاقة الجيدة تفتح أبواب النجاح.", icon: happyIcons[0], color: '#2ecc71' },
+            { quote: "السعادة في التعلم تخلق الإبداع.", icon: happyIcons[2], color: '#f39c12' },
+            { quote: "الفرح يزيد من قدرتك على الإنتاج.", icon: happyIcons[4], color: '#3498db' }
+        ];
+        
+        // اقتباسات الحيادية
+        const neutralQuotes = [
+            { quote: "التركيز هو سر التحصيل العلمي الجيد.", icon: neutralIcons[0], color: '#f39c12' },
+            { quote: "الاستقرار النفسي يزيد من الفهم والاستيعاب.", icon: neutralIcons[1], color: '#3498db' },
+            { quote: "اليوم العادي هو أساس النجاح الاستثنائي.", icon: neutralIcons[3], color: '#f39c12' },
+            { quote: "الهدوء يجعل العقل أكثر قدرة على التعلم.", icon: neutralIcons[4], color: '#3498db' },
+            { quote: "الانتظام في الدراسة أهم من الموهبة.", icon: neutralIcons[2], color: '#f39c12' },
+            { quote: "لا تنتظر الظروف، اخلقها بنفسك.", icon: neutralIcons[0], color: '#3498db' },
+            { quote: "الانضباط اليومي يصنع الفارق غداً.", icon: neutralIcons[3], color: '#f39c12' },
+            { quote: "الاستمرارية تتفوق على الذكاء وحده.", icon: neutralIcons[1], color: '#3498db' },
+            { quote: "اليوم العادي هو فرصتك للتميز.", icon: neutralIcons[4], color: '#f39c12' },
+            { quote: "الروتين الإيجابي يصنع المعجزات.", icon: neutralIcons[2], color: '#3498db' }
+        ];
+        
+        // مؤشرات للاقتباسات الحالية
+        let currentSadIndex = 0;
+        let currentHappyIndex = 0;
+        let currentNeutralIndex = 0;
+        
+        // تهيئة الموقع عند التحميل
+        window.onload = function() {
+            // يتم تعيين أول اقتباس بشكل عشوائي عند التحميل الأولي
+            currentSadIndex = Math.floor(Math.random() * sadQuotes.length);
+            currentHappyIndex = Math.floor(Math.random() * happyQuotes.length);
+            currentNeutralIndex = Math.floor(Math.random() * neutralQuotes.length);
+
+            setupEventListeners();
+        };
+        
+        // إعداد مستمعي الأحداث
+        function setupEventListeners() {
+            // أزرار المزاج
+            document.getElementById('sadBtn').addEventListener('click', () => openMoodPage('sad'));
+            document.getElementById('happyBtn').addEventListener('click', () => openMoodPage('happy'));
+            document.getElementById('neutralBtn').addEventListener('click', () => openMoodPage('neutral'));
+            
+            // أزرار الإغلاق والعودة
+            document.getElementById('closeSadPage').addEventListener('click', () => closeMoodPage('sad'));
+            document.getElementById('closeHappyPage').addEventListener('click', () => closeMoodPage('happy'));
+            document.getElementById('closeNeutralPage').addEventListener('click', () => closeMoodPage('neutral'));
+            
+            document.getElementById('backFromSad').addEventListener('click', () => closeMoodPage('sad'));
+            document.getElementById('backFromHappy').addEventListener('click', () => closeMoodPage('happy'));
+            document.getElementById('backFromNeutral').addEventListener('click', () => closeMoodPage('neutral'));
+            
+            // أزرار الاقتباسات التالية
+            document.getElementById('nextSadQuote').addEventListener('click', () => showNextQuote('sad'));
+            document.getElementById('nextHappyQuote').addEventListener('click', () => showNextQuote('happy'));
+            document.getElementById('nextNeutralQuote').addEventListener('click', () => showNextQuote('neutral'));
+
+            // إضافة مستمعي الأحداث لأيقونات وصور معرض الصور
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const topic = this.getAttribute('data-topic');
+                    alert(`ستظهر هنا نافذة جديدة أو عرض تفصيلي لموضوع: ${topic}`);
+                });
+            });
+        }
+        
+        // فتح صفحة المزاج
+        function openMoodPage(mood) {
+            closeAllPages();
+            const page = document.getElementById(mood + 'Page');
+            page.classList.add('active');
+            showCurrentQuote(mood);
+        }
+        
+        // إغلاق صفحة المزاج
+        function closeMoodPage(mood) {
+            const page = document.getElementById(mood + 'Page');
+            page.classList.remove('active');
+        }
+        
+        // إغلاق جميع الصفحات
+        function closeAllPages() {
+            const pages = document.querySelectorAll('.mood-page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+        }
+        
+        // عرض الاقتباس الحالي (يتم استدعاؤها عند فتح الصفحة)
+        function showCurrentQuote(mood) {
+            let quotes, quoteElement, iconElement, currentIndex, pageContentElement;
+            
+            if (mood === 'sad') {
+                quotes = sadQuotes;
+                quoteElement = document.getElementById('sadQuote');
+                iconElement = document.getElementById('sadIcon');
+                currentIndex = currentSadIndex;
+                pageContentElement = document.getElementById('sadPage').querySelector('.page-content');
+            } else if (mood === 'happy') {
+                quotes = happyQuotes;
+                quoteElement = document.getElementById('happyQuote');
+                iconElement = document.getElementById('happyIcon');
+                currentIndex = currentHappyIndex;
+                pageContentElement = document.getElementById('happyPage').querySelector('.page-content');
+            } else {
+                quotes = neutralQuotes;
+                quoteElement = document.getElementById('neutralQuote');
+                iconElement = document.getElementById('neutralIcon');
+                currentIndex = currentNeutralIndex;
+                pageContentElement = document.getElementById('neutralPage').querySelector('.page-content');
+            }
+            
+            const item = quotes[currentIndex];
+            quoteElement.textContent = item.quote;
+            
+            // تحديث الأيقونة
+            iconElement.className = `${item.icon} quote-icon`;
+            iconElement.style.color = item.color || '#3498db'; 
+
+            // تحديث الحدود في الاقتباس وصفحة المحتوى
+            quoteElement.style.borderRightColor = item.color || '#3498db';
+            pageContentElement.style.borderColor = item.color || '#3498db';
+        }
+        
+        // عرض الاقتباس التالي (بالتنقل)
+        function showNextQuote(mood) {
+            let quotes, quoteElement, iconElement, pageContentElement;
+
+            if (mood === 'sad') {
+                quotes = sadQuotes;
+                quoteElement = document.getElementById('sadQuote');
+                iconElement = document.getElementById('sadIcon');
+                currentSadIndex = (currentSadIndex + 1) % quotes.length;
+                pageContentElement = document.getElementById('sadPage').querySelector('.page-content');
+            } else if (mood === 'happy') {
+                quotes = happyQuotes;
+                quoteElement = document.getElementById('happyQuote');
+                iconElement = document.getElementById('happyIcon');
+                currentHappyIndex = (currentHappyIndex + 1) % quotes.length;
+                pageContentElement = document.getElementById('happyPage').querySelector('.page-content');
+            } else {
+                quotes = neutralQuotes;
+                quoteElement = document.getElementById('neutralQuote');
+                iconElement = document.getElementById('neutralIcon');
+                currentNeutralIndex = (currentNeutralIndex + 1) % quotes.length;
+                pageContentElement = document.getElementById('neutralPage').querySelector('.page-content');
+            }
+
+            const currentIndex = (mood === 'sad') ? currentSadIndex : (mood === 'happy' ? currentHappyIndex : currentNeutralIndex);
+            const item = quotes[currentIndex];
+
+            // تحديث المحتوى
+            quoteElement.textContent = item.quote;
+            
+            // تحديث الأيقونة والألوان
+            iconElement.className = `${item.icon} quote-icon`;
+            iconElement.style.color = item.color || '#3498db';
+            quoteElement.style.borderRightColor = item.color || '#3498db';
+            pageContentElement.style.borderColor = item.color || '#3498db';
+
+
+            // إضافة تأثير تحريك بسيط عند تغيير الاقتباس
+            iconElement.style.animation = 'none';
+            void iconElement.offsetWidth; /* Trick to restart animation */
+            iconElement.style.animation = 'pulse 2s infinite';
+        }
+    </script>
+</body>
+</html>
